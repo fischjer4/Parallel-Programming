@@ -35,7 +35,7 @@
 \def \GroupNumber{		17}
 \def \Jeremy{			Jeremy Fischer}
 \def \Class{		Parallel Programming}
-\def \Assn{		Project 0: }
+\def \Assn{		Project 0: Simple OpenMP Experiment}
 \def \School{	Oregon State University}
 \def \Professor{		Mike Bailey}
 
@@ -93,19 +93,57 @@
             }
             \vspace{20pt}
         }
-        \begin{abstract}
-        	This document explores processes, 
-        \end{abstract}     
+
     \end{singlespace}
 \end{titlepage}
 \newpage
 \pagenumbering{arabic}
-\tableofcontents
+
 % 7. uncomment this (if applicable). Consider adding a page break.
 %\listoffigures
 %\listoftables
 \clearpage
 
+
+	\section{Tell what machine you ran this on}	
+	I ran this test on a 2015 Macbook Pro, 2.2 GHz Intel Core i7, 16 GB 1600 MHz DDR3.
+	
+	
+	
+	\section{ What performance results did you get?}
+	With \textit{ARRAYSIZE = 10000} and \textit{NUMTRIES = 30} I got \dots
+	
+	\underline{1 Thread}
+	\\
+	Peak Performance =  2000.26 MegaMults/Sec
+	\\
+	Average Performance =  1924.50 MegaMults/Sec
+	
+	\underline{4 Threads}
+	\\
+	Peak Performance =  243.90 MegaMults/Sec
+	\\
+	Average Performance =  181.65 MegaMults/Sec
+
+	
+	\section{ What was your 4-thread-to-one-thread speedup?}
+	My 4-thread-to-one-thread speedup was 10.60.
+	
+	
+	
+	
+	\section{ Why do you think it is behaving this way?}
+	Multiplying numbers from two arrays and storing them in a result array is a situation where threads can be used to their full advantage, because there is no overlap between multiplications. Meaning, each thread can take a portion of the multiplications and compute them. This increases the performance of the computation.
+	
+	
+	
+	
+	\section{ What was your Parallel Fraction, Fp?}
+	My parallel fraction, Fp = 1.207.
+	
+	
+	
+	
 
 
 
