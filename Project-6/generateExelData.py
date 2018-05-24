@@ -18,10 +18,10 @@ MultRedlocalSizeValues = []
 # Parse Data
 ##############
 
-# valsForExcel.txt = <LOCAL_SIZE>,<NUM_ELEMENTS>,<megaMults>
+# valsForExcel.txt = <LOCAL_SIZE>,<NUM_ELEMENTS>,<GigaMults>
 # data = {
 # 	<LOCAL_SIZE>:{
-# 		<NUM_ELEMENTS>: <megaMults>
+# 		<NUM_ELEMENTS>: <GigaMults>
 # 	}
 # }
 with open('arrayMult.txt') as fp:
@@ -29,7 +29,7 @@ with open('arrayMult.txt') as fp:
 		parsed = [float(x.strip()) for x in line.split(',')]
 		localSize = parsed[0]
 		numElements = parsed[1]
-		megaMults = parsed[2]
+		GigaMults = parsed[2]
 		if numElements not in MultnumElementsValues:
 			MultnumElementsValues.append(numElements)
 		if localSize not in MultlocalSizeValues:
@@ -37,14 +37,14 @@ with open('arrayMult.txt') as fp:
 
 		if localSize not in arrayMultData:
 			arrayMultData[localSize] = {}
-		arrayMultData[localSize][numElements] = megaMults
+		arrayMultData[localSize][numElements] = GigaMults
 
 with open('arrayMultAdd.txt') as fp2:
 	for line in fp2:
 		parsed = [float(x.strip()) for x in line.split(',')]
 		localSize = parsed[0]
 		numElements = parsed[1]
-		megaMults = parsed[2]
+		GigaMults = parsed[2]
 		if numElements not in MultAddnumElementsValues:
 			MultAddnumElementsValues.append(numElements)
 		if localSize not in MultAddlocalSizeValues:
@@ -52,14 +52,14 @@ with open('arrayMultAdd.txt') as fp2:
 
 		if localSize not in arrayMultAddData:
 			arrayMultAddData[localSize] = {}
-		arrayMultAddData[localSize][numElements] = megaMults
+		arrayMultAddData[localSize][numElements] = GigaMults
 
 with open('arrayMultReduction.txt') as fp3:
 	for line in fp3:
 		parsed = [float(x.strip()) for x in line.split(',')]
 		localSize = parsed[0]
 		numElements = parsed[1]
-		megaMults = parsed[2]
+		GigaMults = parsed[2]
 		if numElements not in MultRednumElementsValues:
 			MultRednumElementsValues.append(numElements)
 		if localSize not in MultRedlocalSizeValues:
@@ -67,7 +67,7 @@ with open('arrayMultReduction.txt') as fp3:
 
 		if localSize not in arrayMultReductionData:
 			arrayMultReductionData[localSize] = {}
-		arrayMultReductionData[localSize][numElements] = megaMults
+		arrayMultReductionData[localSize][numElements] = GigaMults
 
 pp = pprint.PrettyPrinter(indent=4)
 pp.pprint(arrayMultData)
@@ -90,8 +90,8 @@ row = 1
 for localSize, values in arrayMultData.items():
 	col = 1
 	worksheet.write(row, 0, localSize, bold_cell_format)
-	for numEle, megas in values.items():
-		worksheet.write(row, col, megas)
+	for numEle, Gigas in values.items():
+		worksheet.write(row, col, Gigas)
 		col += 1
 	row += 1
 
@@ -107,8 +107,8 @@ startMultAdd = row
 for localSize, values in arrayMultAddData.items():
 	col = 1
 	worksheet.write(row, 0, localSize, bold_cell_format)
-	for numEle, megas in values.items():
-		worksheet.write(row, col, megas)
+	for numEle, Gigas in values.items():
+		worksheet.write(row, col, Gigas)
 		col += 1
 	row += 1
 
@@ -124,8 +124,8 @@ startMultRed = row
 for localSize, values in arrayMultReductionData.items():
 	col = 1
 	worksheet.write(row, 0, localSize, bold_cell_format)
-	for numEle, megas in values.items():
-		worksheet.write(row, col, megas)
+	for numEle, Gigas in values.items():
+		worksheet.write(row, col, Gigas)
 		col += 1
 	row += 1
 
@@ -133,9 +133,9 @@ for localSize, values in arrayMultReductionData.items():
 
 ############# ArrayMult Graph building #############
 ##############################################
-#			LINE GRAPH MegaMults v. Global Work Size
+#			LINE GRAPH GigaMults v. Global Work Size
 # 	Values = Y axis	   Categories = X axis
-#	Values = MegaMults Categories = Num Elements (global work size)
+#	Values = GigaMults Categories = Num Elements (global work size)
 ##############################################
 
 chart1 = workbook.add_chart({'type': 'line'})
@@ -154,7 +154,7 @@ chart1.set_x_axis({
 	'name': 'Global Work Size (size of arrays)',
 })
 chart1.set_y_axis({
-	'name': 'MegaMultiplies Per Second',
+	'name': 'GigaMultiplies Per Second',
 })
 
 currentInsertDepth = 1
@@ -163,9 +163,9 @@ insert = str(chr(65 + len(MultnumElementsValues) + 1)) + str(currentInsertDepth)
 worksheet.insert_chart(insert, chart1)
 
 ##############################################
-#			LINE GRAPH MegaMults v. Local Work Size
+#			LINE GRAPH GigaMults v. Local Work Size
 # 	Values = Y axis	   Categories = X axis
-#	Values = MegaMults Categories = Local Work Size
+#	Values = GigaMults Categories = Local Work Size
 ##############################################
 chart2 = workbook.add_chart({'type': 'line'})
 rowValues = 1
@@ -183,7 +183,7 @@ chart2.set_x_axis({
 	'name': 'Local Work Size',
 })
 chart2.set_y_axis({
-	'name': 'MegaMultiplies Per Second',
+	'name': 'GigaMultiplies Per Second',
 })
 
 currentInsertDepth += 18
@@ -195,9 +195,9 @@ worksheet.insert_chart(insert, chart2)
 
 ############# ArrayMultAdd Graph building #############
 ##############################################
-#			LINE GRAPH MegaMults v. Global Work Size
+#			LINE GRAPH GigaMults v. Global Work Size
 # 	Values = Y axis	   Categories = X axis
-#	Values = MegaMults Categories = Num Elements (global work size)
+#	Values = GigaMults Categories = Num Elements (global work size)
 ##############################################
 chart3 = workbook.add_chart({'type': 'line'})
 rowValues = startMultAdd
@@ -215,7 +215,7 @@ chart3.set_x_axis({
 	'name': 'Global Work Size (size of arrays)',
 })
 chart3.set_y_axis({
-	'name': 'MegaMultiplies And Adds Per Second',
+	'name': 'GigaMultiplies And Adds Per Second',
 })
 currentInsertDepth += 18
 insert = str(chr(65 + len(MultAddnumElementsValues) + 1)) + str(currentInsertDepth)
@@ -223,9 +223,9 @@ insert = str(chr(65 + len(MultAddnumElementsValues) + 1)) + str(currentInsertDep
 worksheet.insert_chart(insert, chart3)
 
 ##############################################
-#			LINE GRAPH MegaMults v. Local Work Size
+#			LINE GRAPH GigaMults v. Local Work Size
 # 	Values = Y axis	   Categories = X axis
-#	Values = MegaMults Categories = Local Work Size
+#	Values = GigaMults Categories = Local Work Size
 ##############################################
 chart4 = workbook.add_chart({'type': 'line'})
 rowValues = startMultAdd
@@ -243,7 +243,7 @@ chart4.set_x_axis({
 	'name': 'Local Work Size',
 })
 chart4.set_y_axis({
-	'name': 'MegaMultiplies And Adds Per Second',
+	'name': 'GigaMultiplies And Adds Per Second',
 })
 currentInsertDepth += 18
 insert = str(chr(65 + len(MultAddnumElementsValues) + 1)) + str(currentInsertDepth)
@@ -254,9 +254,9 @@ worksheet.insert_chart(insert, chart4)
 
 ############# ArrayMultRed Graph building #############
 ##############################################
-#			LINE GRAPH MegaMults v. Global Work Size
+#			LINE GRAPH GigaMults v. Global Work Size
 # 	Values = Y axis	   Categories = X axis
-#	Values = MegaMults Categories = Num Elements (global work size)
+#	Values = GigaMults Categories = Num Elements (global work size)
 ##############################################
 chart5 = workbook.add_chart({'type': 'line'})
 rowValues = startMultRed
@@ -274,7 +274,7 @@ chart5.set_x_axis({
 	'name': 'Global Work Size (size of arrays)',
 })
 chart5.set_y_axis({
-	'name': 'MegaMultiplies Reductions Per Second',
+	'name': 'GigaMultiplies Reductions Per Second',
 })
 currentInsertDepth += 18
 insert = str(chr(65 + len(MultRednumElementsValues) + 1)) + str(currentInsertDepth)

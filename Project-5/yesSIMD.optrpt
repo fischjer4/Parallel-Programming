@@ -1,0 +1,32 @@
+
+Begin optimization report for: main(int, char **)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at source.cpp(19,3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed OUTPUT dependence between  line 20 and  line 21
+LOOP END
+
+LOOP BEGIN at source.cpp(28,2)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at source.cpp(28,2)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15449: unmasked aligned unit stride stores: 1 
+   remark #15467: unmasked aligned streaming stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 44 
+   remark #15477: vector loop cost: 8.500 
+   remark #15478: estimated potential speedup: 5.170 
+   remark #15479: lightweight vector operations: 4 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at source.cpp(28,2)
+<Remainder>
+LOOP END
+===========================================================================

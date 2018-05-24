@@ -1,6 +1,10 @@
 #Added by MacOS
 .DS_Store
 
+#Project Details
+*.doc
+*.docx
+
 #Added by compiling tex files
 *.toc
 *.aux
